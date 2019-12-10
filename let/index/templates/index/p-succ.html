@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block content %}
+	{% if stats %}
+	<div class="jumbotron jumbotron-fluid text-center">
+		<h4>{{ stats.name }}, you got...</h4>
+		<h1 class="display-1" id="animate">0</h1>
+		{% if call %}
+	       		<p class="lead">	
+			You had {{ call }} to Top the L.E.T ! 
+			</p>
+		{% endif %}
+	</div>
+	<div class="container">
+		<div class="accordion mb-3" id="accordion"> 
+		<div class="card"> 
+			<div class="card-header" id="header1">
+			<h5 class="mb-0">
+			<button class="btn btn-link" data-toggle="collapse" data-target="#total" style="font-size: 1em;">
+			Total results
+			</button>
+			</div>
+		<div id="total" class="collapse" data-parent="#accordion">
+			<div class="card card-body">
+				<ul>	
+					<li>Personal Factor : {{ overall1 }}</li>
+					<li>Family Factor : {{ overall2 }}</li>
+					<li>Peer Factor : {{ overall3 }}</li>
+					<li>School Factor : {{ overall4 }}</li>
+					<li>Miscellaneous Factor : {{ overall5 }}</li>
+				</ul>
+					<p class="text-center lead display-5">	
+						Total : {{ total }}  
+					</p>
+					<p class="text-center lead display-5">	
+						Average : {{ average }}
+					</p>
+			</div>
+		</div>
+		<div class="card"> 
+			<div class="card-header" id="header2">
+			<h5 class="mb-0">
+			<button class="btn btn-link" data-toggle="collapse" data-target="#stats" style="font-size: 1em;">
+			Statistical Analysis
+			</button>
+			</div>
+		
+		<div id="stats" class="collapse" data-parent="#accordion">
+			<div class="card card-body">
+				<div class = 'row'>
+					<div class ='col-sm-12'>
+						<canvas id="myChart" width="250" height="250"></canvas>
+						Fig 1. Personal Factors  
+						This was the user blah blah blah Personal Factor represents the blah blah ....
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+
+		</div>		
+		<a class="my-5 btn btn-block btn-dark text-light" href = "{% url 'index:ind' %}">
+			<i class="fa fa-home fa-lg"></i>
+			Back To Home Page
+		</a>
+	</div>
+		 
+		 
+		 
+	{% endif %}
+
+	{% endblock content %}
+{% block post_js %}
+	<script>
+	var percent = $.animateNumber.numberStepFactories.append(' %');
+	$('#animate').animateNumber({
+		number: {{percentage}},
+		numberStep: percent
+	},{ duration: 2000 }
+	);
+		var endpoint = '/api/data/charts/'
+		var defaultData = []
+		var labels = []
+		$.ajax({
+			method : "GET",
+			url : endpoint,
+			success: function(data){
+				labels = data.labels
+				defaultData = data.defaultData
+				var ctx = document.getElementById('myChart');
+				setChart()
+			},
+			error: function(error_data){
+				console.log("error")
+				console.log(error_data)
+			}
+		})
+
+		function setChart(){
+			var ctx = document.getElementById('myChart');
+			var myChart = new Chart(ctx, {
+			    type: 'polarArea',
+			    data: {
+			        labels: labels,
+			        datasets: [{
+			            label: 'Percentages of Factors',
+			            data: defaultData,
+			            backgroundColor: [
+			                'rgba(255, 99, 132, 0.2)',
+			                'rgba(54, 162, 235, 0.2)',
+			                'rgba(255, 206, 86, 0.2)',
+			                'rgba(75, 192, 192, 0.2)',
+			                'rgba(153, 102, 255, 0.2)',
+			                'rgba(255, 159, 64, 0.2)'
+			            ],
+			            borderColor: [
+			                'rgba(255, 99, 132, 1)',
+			                'rgba(54, 162, 235, 1)',
+			                'rgba(255, 206, 86, 1)',
+			                'rgba(75, 192, 192, 1)',
+			                'rgba(153, 102, 255, 1)',
+			                'rgba(255, 159, 64, 1)'
+			            ],
+			            borderWidth: 1
+			        }]
+			    },
+			    options: {
+			        scales: {
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero: true
+			                }
+			            }]
+			        }
+			    }
+			});
+		}
+	</script>	
+
+{% endblock post_js %}

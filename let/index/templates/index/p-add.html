@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+	.asteriskField {
+		display: none;
+	}
+</style>
+<div class="container">
+Please answer with truthfullness <br>
+<form method = "POST">
+		{% csrf_token %}
+		{{ form|crispy }}
+		<button class = "btn btn-lg btn-block btn-outline-light text-dark" type = "submit" > 
+			<i class="fa fa-plus fa-lg"></i>
+			Submit 
+		</button>
+</form>
+</div>
+{% endblock content %}

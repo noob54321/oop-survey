@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6padl!mw0lvtl^p9$o!@wo_kw48jnu8)!_xbj26qlgb3g!q1+7'
+SECRET_KEY = '4&_75zqs5-f$(r=u)5&snn03*6e+2tfyz_e*9m(hc!#mq1)-9&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap',
+    'fontawesome',
+    'index.apps.IndexConfig',
+    'rest_framework',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,9 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'exam.apps.ExamConfig',
-    'bootstrap',
-    'fontawesome',
 ]
 
 MIDDLEWARE = [
@@ -124,5 +125,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static/'),
+    os.path.join(BASE_DIR, 'static/')
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

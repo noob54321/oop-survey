@@ -1,14 +1,100 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="jumbotron jumbotron-fluid text-center">
-	<h1 class="display-1"> LST </h1>
-	<small class="lead">licensure exam statistical test </span>
-</div>
-<div class="container-fluid">
-{% lorem 1 %}
-<a class="btn btn-lg btn-block btn-outline-dark mt-3 p-4" href= "{% url 'index:ind-add' %}">
-	<i class="fa fa-edit fa-lg"></i>
-	TAKE THE TEST
-</a>
-</div>
+	{% include 'paper.css' %}
+	<div class="jumbotron jumbotron-fluid text-center paper-gradient"> 
+		<h1 class="display-1"> LST </h1>
+		<p class="lead">licensure exam statistical test </p>
+	</div>
+
+	<div class="container align-center">
+		<div class="card card-body">
+			<blockquote class="blockquote">	
+				<p class="mb-0">The academic performance of students can be infered by  their financial capability, by how their parents guided them, the learning and teaching process and the infrastracture of the environment of the student. positive side of the said factors can result to a great academic performance of a student while negative side may result to a poor academic performance of the said student. </p>
+				<footer class="blockquote-footer">
+Wan Maziah Wan Ab Razak et al.,
+				</footer>
+			</blockquote>
+		</div>
+
+		<!-- <canvas id="myChart" width="250" height="250"></canvas> -->
+		<table class="table table-responsive table-bordered table-striped my-2">
+			<tr>
+				<th colspan="6">
+					<h2> Top Universities that top the statistical test </h2>
+				</th>
+			</tr>
+			<tr>
+            	<th></th>
+            	<th style="text-align:left;">School</th>
+            	<th colspan="4">Percentage<br />(scores over max)</th>
+        	</tr>
+        
+        	{% if objects %}
+        		{% for obj in objects %}
+        			<tr>
+                    	<td>{{ obj.id }}</td>
+                   		 <td>
+                       		{{ obj.label }}
+                    	 </td>
+                    	<td>  {% widthratio obj.val 1 100 %} % </td>
+                    	<td>{{ obj.orig }}</td>
+                    	<td>of</td>
+                    	<td>{{ obj.max }}</td>
+                </tr>
+        		{% endfor %}
+        	{% endif %}
+
+		</table>
+	</div>
+
+	<a class="btn btn-lg btn-block btn-outline-dark mt-2 p-4" href= "{% url 'index:ind-add' %}" style="font-size: 1.5em;">
+		<i class="fa fa-edit fa-lg"></i>
+		TAKE THE TEST
+	</a>
 {% endblock content %}
+{% block post_js %}
+	<!-- <script>
+		var endpoint = '/api/data/chartss/'
+		var defaultData = []
+		var labels = []
+		$.ajax({
+			method : "GET",
+			url : endpoint,
+			success: function(data){
+				labels = data.labels
+				defaultData = data.defaultData
+				setChart()
+			},
+			error: function(error_data){
+				console.log("error")
+				console.log(error_data)
+			}
+		})
+
+		function setChart(){
+			var ctx = document.getElementById('myChart');
+			var myChart = new Chart(ctx, {
+			    type: 'bar',
+			    data: {
+			        labels: labels,
+			        datasets: [{
+			            label: 'Percentages of Factors',
+			            data: defaultData,
+			            backgroundColor: [
+			                '#ff6384',
+			                '#36a2eb',
+			                '#cc65fe',
+			                '#ffce56',
+			                'rgba(153, 102, 255, 0.2)',
+			                'rgba(255, 159, 64, 0.2)'
+			            ],
+			            borderColor: "#fff",
+			            borderWidth: 1
+			        }]
+			    },
+			    options: {
+			    }
+			});
+		}
+	</script> -->
+{% endblock post_js %}

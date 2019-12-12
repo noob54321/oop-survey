@@ -16,50 +16,110 @@
 			<div class="card-header" id="header1">
 			<h5 class="mb-0">
 			<button class="btn btn-link" data-toggle="collapse" data-target="#total" style="font-size: 1em;">
-			Total results
+				<i class="fas fa-sticky-note fa-lg mr-3"></i>Total results
 			</button>
 			</div>
 		<div id="total" class="collapse" data-parent="#accordion">
 			<div class="card card-body">
-				<ul>	
-					<li>Personal Factor : {{ overall1 }}</li>
-					<li>Family Factor : {{ overall2 }}</li>
-					<li>Peer Factor : {{ overall3 }}</li>
-					<li>School Factor : {{ overall4 }}</li>
-					<li>Miscellaneous Factor : {{ overall5 }}</li>
+				<ul class="list-group list-group-flush mb-3">	
+					<li class="list-group-item">Personal Factor : {{ overall1 }}</li>
+				<li class="list-group-item">Family Factor : {{ overall2 }}</li>
+				<li class="list-group-item">Peer Factor : {{ overall3 }}</li>
+				<li class="list-group-item">School Factor : {{ overall4 }}</li>
+				<li class="list-group-item">Miscellaneous Factor : {{ overall5 }}</li>
 				</ul>
-					<p class="text-center lead display-5">	
+				<div class="mx-auto">
+					<p class="text-center lead display-5 font-weight-bold">	
 						Total : {{ total }}  
-					</p>
-					<p class="text-center lead display-5">	
+					
+					<p class="text-center lead display-5 font-weight-bold">	
 						Average : {{ average }}
 					</p>
+				</div>
 			</div>
 		</div>
 		<div class="card"> 
 			<div class="card-header" id="header2">
 			<h5 class="mb-0">
 			<button class="btn btn-link" data-toggle="collapse" data-target="#stats" style="font-size: 1em;">
-			Statistical Analysis
+				<i class="far fa-chart-bar fa-lg mr-3"></i>Statistical Analysis
 			</button>
 			</div>
 		
 		<div id="stats" class="collapse" data-parent="#accordion">
-			<div class="card card-body">
-				<div class = 'row'>
-					<div class ='col-sm-12'>
-						<canvas id="myChart" width="250" height="250"></canvas>
-						Fig 1. Personal Factors  
-						This was the user blah blah blah Personal Factor represents the blah blah ....
+			<div id="statslide" class="carousel slide mb-2 mx-auto" data-ride="carousel">
+				<div class="carousel-inner">
+					<div class="carousel-item active"> 
+						<canvas id="myChart"> </canvas>
+						<div class="carousel-caption text-dark d-none d-block font-weight-bold">
+							<h4> Fig 1. Factors that affects the chance </h4>
+							<p> Consists of interpersonal and intrapersonal variables that affects... </p>
+						</div>	
+					</div>
+					<div class="carousel-item">
+						<canvas id="myChart1"></canvas> 
+						<div class="carousel-caption text-dark d-none d-block font-weight-bold">
+							<h4> Fig 2. Overall chances of participants </h4>
+							<p> Consists of data gathered from people who took this test </p>
+						</div>	
 					</div>
 				</div>
 			</div>
+			<a class="carousel-control-prev" href="#statslide" data-slide="prev" style="color: black;">
+				<span class="carousel-control-prev-icon" span>
+			</a>
+			<a class="carousel-control-next" href="#statslide" data-slide="next" style="color: black;">
+				<span class="carousel-control-next-icon" style="color: black;"></span>
+			</a>
+			<div class="accordion" id="explanations">
+				<div class="card">
+					<div class="card-header" id="exph1">
+						<p class="mb-0"> 
+						<button class="btn btn-link" data-toggle="collapse" data-target="exp1">
+							Figure 1 explanation
+						</button>	
+						</p>
+					</div>
+					<div id="exp1" class="collapse show" data-parent="#explanations">
+						<div class="card card-body">
+							<h5>Personal Factors</h5>
+							<small class="lead">
+								Consisted of study habits, stead prayers life, consisted honor student, positive attitute, 
+								home study, bookworm/ reading in advance. 
+							</small>
+							<div class="row">
+								<div class="col-3">
+									<div class="list-group">
+										<a class="list-group-item list-group-item-action active" id="hftoggle" data-toggle="list" href="#hftab">Home Factor</a>
+										<a class="list-group-item list-group-item-action active" id="pftoggle" data-toggle="list" href="#pftab">Peer Factor</a>
+										<a class="list-group-item list-group-item-action active" id="sftoggle" data-toggle="list" href="#sftab">School Factor</a>
+										<a class="list-group-item list-group-item-action active" id="tftoggle" data-toggle="list" href="#tftab">Transportation Factor</a>
+									</div>
+									<div class="col-9">
+										<div class="tab-content">
+											<div class="tab-pane fade show active" id="hftab">
+												Family especiall the parents, Father as role of leadership
+											</div>
+											<div class="tab-pane fade" id="pftab">
+												Schoolmates as Review Buddy/Group
+											</div>
+											<div class="tab-pane fade" id="sftab">
+												Curriculum, faculty, learning resources, review program, administration
+											</div>
+											<div class="tab-pane fade" id="hftab">
+												Unit, time to go to school, traffic
+											</div>
+										</div>
+									</div>		
+									This factors affects one performance in exams especially in taking licensure ones. One person prepared and had a good performance sure does had a very high chance to topnotch and vice versa.
+								</div>
+					</div>
+				</div>
 		</div>
-		</div>
-
 		</div>		
-		<a class="my-5 btn btn-block btn-dark text-light" href = "{% url 'index:ind' %}">
-			<i class="fa fa-home fa-lg"></i>
+		</div>
+		<a class="p-4 my-5 btn btn-block btn-dark text-light" href = "{% url 'index:ind' %}" style="font-size: 1em">
+			<i class="fa fa-home fa-lg mr-2"></i>
 			Back To Home Page
 		</a>
 	</div>
@@ -76,18 +136,30 @@
 		number: {{percentage}},
 		numberStep: percent
 	},{ duration: 2000 }
+
 	);
 		var endpoint = '/api/data/charts/'
 		var defaultData = []
 		var labels = []
+		var labels1 = []
+		var defaultData1 = []
+		var id = "{{ stats.pk }}"
+		console.log(id)
 		$.ajax({
 			method : "GET",
 			url : endpoint,
+			data :{ 
+				'idy' : id,
+			 },
+			//console.log(data.id)
 			success: function(data){
 				labels = data.labels
 				defaultData = data.defaultData
-				var ctx = document.getElementById('myChart');
+				labels1 = data.labels1
+				defaultData1 = data.defaultData1
+				//var ctx = document.getElementById('myChart');
 				setChart()
+				setBar()
 			},
 			error: function(error_data){
 				console.log("error")
@@ -98,28 +170,47 @@
 		function setChart(){
 			var ctx = document.getElementById('myChart');
 			var myChart = new Chart(ctx, {
-			    type: 'polarArea',
+			    type: 'doughnut',
 			    data: {
 			        labels: labels,
 			        datasets: [{
 			            label: 'Percentages of Factors',
 			            data: defaultData,
 			            backgroundColor: [
-			                'rgba(255, 99, 132, 0.2)',
-			                'rgba(54, 162, 235, 0.2)',
-			                'rgba(255, 206, 86, 0.2)',
-			                'rgba(75, 192, 192, 0.2)',
+			                '#ff6384',
+			                '#36a2eb',
+			                '#cc65fe',
+			                '#ffce56',
 			                'rgba(153, 102, 255, 0.2)',
 			                'rgba(255, 159, 64, 0.2)'
 			            ],
-			            borderColor: [
-			                'rgba(255, 99, 132, 1)',
-			                'rgba(54, 162, 235, 1)',
-			                'rgba(255, 206, 86, 1)',
-			                'rgba(75, 192, 192, 1)',
-			                'rgba(153, 102, 255, 1)',
-			                'rgba(255, 159, 64, 1)'
+			            borderColor: "#fff",
+			            borderWidth: 1
+			        }]
+			    },
+			    options: {
+			    }
+			});
+		}
+		
+	function setBar(){
+		var ctx1 = document.getElementById('myChart1');
+			var myChart = new Chart(ctx1, {
+			    type: 'bar',
+			    data: {
+			        labels: labels1,
+			        datasets: [{
+			            label: 'Overall Chances',
+			            data: defaultData1,
+			            backgroundColor: [
+			               	'#ff6384',
+			                '#36a2eb',
+			                '#cc65fe',
+			                '#ffce56',
+			                'rgba(153, 102, 255, 0.2)',
+			                'rgba(255, 159, 64, 0.2)'
 			            ],
+			            borderColor: [],
 			            borderWidth: 1
 			        }]
 			    },
@@ -135,5 +226,4 @@
 			});
 		}
 	</script>	
-
 {% endblock post_js %}

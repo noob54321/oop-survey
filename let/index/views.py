@@ -11,8 +11,58 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # Create your views here.
+def Calls(f):
+		if 25 <= f < 49:
+			return "Low Chance"
+		if 50 <= f < 74:
+			return "Average Chance"
+		if 75 <= f < 99 :
+			return "High Chance"
+		return "Very High Chance"
+
+
+class It():
+
+	def __init__(self, i, x):
+		self.id = i
+		self.label = x[0]
+		self.orig = x[1][0]
+		self.max = x[1][1]
+		self.val = x[1][0] / x[1][1]
+
+	def __str__(self):
+		return self.x
+
+
 def index(request):
-	return render(request, 'index/p-ind.html')
+	d = dict()
+	for obj in models.Statistic.objects.all() :
+		if obj.getUniversity() in d :
+			d[obj.getUniversity()][0] += obj.getTotal()
+			d[obj.getUniversity()][1] += models.Statistic.Max()
+		else :
+			d.update({obj.getUniversity() : [obj.getTotal(), models.Statistic.Max() ] })
+
+
+	sorted_d = sorted(d.items(), key=lambda d: d[1][0] / d[1][1])
+	sorted_d = sorted_d[::-1]
+	# print(sorted_d)
+	# d_lab = [ x[0] for x in sorted_d]
+	# d_val = [ x[1][0] / x[1][1]  for x in sorted_d]
+	# if(len(d_lab) <= 5):
+	# 	labels = d_lab[::-1]
+	# 	defaultData = d_val[::-1]
+	# else:
+	# 	labels = d_lab[6:0:-1]
+	# 	defaultData = d_val[6:0:-1]
+	l = []
+	for i,x in enumerate(sorted_d) :
+		l.append( It(i+1,x) )
+
+	#print(l)
+	context = { 'objects' : l }
+	return render(request, 'index/p-ind.html', context)
+
 
 class AddView(generic.CreateView):
 	form_class = forms.StatisticForm
@@ -35,7 +85,7 @@ class AddView(generic.CreateView):
 		f.o3 = o3
 		f.o4 = o4
 		f.o5 = o5
-
+		f.state = Calls(f.total)
 		f.save()
 		return super(AddView,self).form_valid(form)
 
@@ -83,16 +133,40 @@ class ChartData(APIView):
     permission_classes = []
 
     def get(self, request, format=None, **kwargs):
+    	#print(request.GET.get('idy'))
     	labels = ['Personal Factor', 'Family Factor', 'Peer Factor ', 'School Factor', 'Trasportation Factor']
-    	#obj = models.Statistic.objects.get(pk = self.kwargs.get('pk'))
-    	print(self.kwargs.get('pk'))
-    	defaultData = [1,2,3,4,5]
-    	#defaultData = [obj.o1, obj.o2, obj.o3, obj.o4, obj.o5]
+    	obj = models.Statistic.objects.get(pk = request.GET.get('idy'))
+    	#defaultData = [1,2,3,4,5]
+    	defaultData = [obj.o1, obj.o2, obj.o3, obj.o4, obj.o5]
+    	
+    	labels1 = ["Low Chance", "Average Chance", "High Chance", "Very High Chance"]
+    	defaultData1 = [models.Statistic.objects.filter(state="Low Chance").count(), models.Statistic.objects.filter(state="Average Chance").count(),
+    					models.Statistic.objects.filter(state="High Chance").count(), models.Statistic.objects.filter(state="Very High Chance").count(),
+    				  ]
+
     	data = { 'labels' : labels,
     			'defaultData' : defaultData,
+    			'labels1' : labels1,
+    			'defaultData1' : defaultData1,
     			# 'sales':100,
     			# 'customers':10,
     			# 'users': User.objects.all().count(),
     			}
     	return Response(data)
+
+
+class ChartData1(APIView):
+
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, format=None, **kwargs):
+    
+    	#defaultData = d['mapua'][0]
+    	labels = ['Personal Factor', 'Family Factor', 'Peer Factor ', 'School Factor', 'Trasportation Factor']
+    	defaultData = [obj.o1, obj.o2, obj.o3, obj.o4, obj.o5]
     	
+    	data = { 'labels' : labels,
+    			'defaultData' : defaultData,
+    			}
+    	return Response(data)

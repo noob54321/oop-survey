@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% include 'paper.css' %}
 <style>
 	.asteriskField {
 		display: none;
 	}
 </style>
-<div class="container">
+<div class="container paper-gradient">
+<br>
 Please answer with truthfullness <br>
 <form method = "POST">
 		{% csrf_token %}
 		{{ form|crispy }}
-		<button class = "btn btn-lg btn-block btn-outline-light text-dark" type = "submit" > 
-			<i class="fa fa-plus fa-lg"></i>
+		<button class = "btn btn-lg btn-block btn-outline-dark text-dark my-3 py-3" type = "submit" style="font-size:1em;" > 
+			<i class="fa fa-plus fa-lg mr-2"></i>
 			Submit 
 		</button>
 </form>

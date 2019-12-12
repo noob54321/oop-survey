@@ -11,6 +11,7 @@ urlpatterns = [
 	path('success/<int:pk>/', views.SuccessView.as_view(), name='ind-view'),
 	path('api/data/', views.get_data),
 	path('api/data/charts/', views.ChartData.as_view()),
+	path('api/data/chartss/', views.ChartData1.as_view()),
 	#path('', include('index.urls')),
     #path('admin/', admin.site.urls),
 ]

@@ -54,8 +54,20 @@ class Statistic(models.Model) :
 	o4 = models.IntegerField(default=0, null=True, verbose_name='Overall 4')
 	o5 = models.IntegerField(default=0, null=True, verbose_name='Overall 5')
 
+	state  = models.CharField(max_length=100)
+
+
 	def __str__(self):
 		return self.name
+
+	def getState(self):
+		return self.state
+
+	def getUniversity(self):
+		return self.university
+
+	def getTotal(self):
+		return self.total
 
 	@staticmethod
 	def Max():
@@ -94,3 +106,9 @@ class Statistic(models.Model) :
 		if 75 <= self.total < 99 :
 			return "High Chance"
 		return "Very High Chance"
+
+	@classmethod
+	def StateAll(cls):
+		return {'Low Chance' : 0 , 'Average CharField' : 0 , 'High Chance' : 0 , 'Very High Chance' : 0}
+
+	

@@ -21,6 +21,10 @@ class StatisticForm(forms.ModelForm):
 			   (4,"Puts it in a priority"),
 			   (5,"Diligently Uphold a Proper Study Routine"),)
 
+			   (4,"Often"),
+			   (5, "Always"))
+
+
 	CHOICES = ((1,"Never"),
 			   (2,"Rarely"),
 			   (3,"Sometimes"),
@@ -39,11 +43,13 @@ class StatisticForm(forms.ModelForm):
 			   (4,"Agree"),
 			   (5, "Strongly Agree"))
 
-	CHOICES_2REV = ((5,"Strongly Agree"),
-			   (4,"Agree"),
+	CHOICES_2REV = ( 			 
+			   (5,"Strong Disagree"),
+			   (4,"Disagree"),
 			   (3,"Neutral"),
-			   (2,"Disagree"),
-			   (1,"Strong Disagree"),)
+			   (2,"Agree"),
+			   (1,"Strongly Agree"),
+)
 
 	CHOICES_4 = ((1,"2 or more of mentioned above"),
 			   (2,"Train/Bus"),
@@ -113,7 +119,7 @@ class StatisticForm(forms.ModelForm):
 	#name = forms.ChoiceField(choices = CHOICES)
 	class Meta:
 		model = models.Statistic
-		exclude = ('total','over','o1','o2','o3','o4','o5')
+		exclude = ('total','over','o1','o2','o3','o4','o5','state')
 
 	def __init__(self, *args, **kwargs):
 		super(StatisticForm, self).__init__(*args, **kwargs)

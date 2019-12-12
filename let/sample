@@ -1,0 +1,15 @@
+	<p>
+														<p>
+								<center></center>
+								<br>
+								This shows all the datum gathered from the users that took the test. Consisted of the general weight coming from the total of weights gathered over the maximum weight. Consisted of four weights : Low Chance, Average Chance, High Chance, and Very High Chance.
+								<br>
+								<b>Low Chance</b>. gathered from 25-49 performance.
+								<br>
+								<b>Average Chance</b>. range from 50 to 74.
+								<br>
+								<b>High Chance</b>. range from 75 to 99.
+								<br>
+								Lastly, <b>High Chance</b> from 100 and above.
+							</p>
+

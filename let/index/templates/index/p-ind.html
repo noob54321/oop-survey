@@ -6,8 +6,8 @@
 		<p class="lead">licensure exam statistical test </p>
 	</div>
 
-	<div class="container align-center">
-		<div class="card card-body">
+	<div class="container">
+		<div class="card card-body mb-3">
 			<blockquote class="blockquote">	
 				<p class="mb-0">The academic performance of students can be infered by  their financial capability, by how their parents guided them, the learning and teaching process and the infrastracture of the environment of the student. positive side of the said factors can result to a great academic performance of a student while negative side may result to a poor academic performance of the said student. </p>
 				<footer class="blockquote-footer">
@@ -17,40 +17,35 @@ Wan Maziah Wan Ab Razak et al.,
 		</div>
 
 		<!-- <canvas id="myChart" width="250" height="250"></canvas> -->
-		<table class="table table-responsive table-bordered table-striped my-2">
+		<h3 class="text-center"> University Top Scores </h3>
+		<table class="table table-responsive-lg table-sm table-hover table-bordered text-center"> 
+		<thead class="thead-dark">
 			<tr>
-				<th colspan="6">
-					<h2> Top Universities that top the statistical test </h2>
-				</th>
+				<th scope="col">#</th>
+				<th scope="col">School</th>
+				<th scope="col" colspan="4">Percentage<br />(scores over max)</th>
 			</tr>
-			<tr>
-            	<th></th>
-            	<th style="text-align:left;">School</th>
-            	<th colspan="4">Percentage<br />(scores over max)</th>
-        	</tr>
-        
+		</thead>
+
         	{% if objects %}
         		{% for obj in objects %}
-        			<tr>
-                    	<td>{{ obj.id }}</td>
-                   		 <td>
-                       		{{ obj.label }}
-                    	 </td>
-                    	<td>  {% widthratio obj.val 1 100 %} % </td>
+        		<tr>
+                    	<th scope="row">{{ obj.id }}</th>
+                   	<td>{{ obj.label }}</td>
+			<td>{{obj.val|floatformat}} % </td>
                     	<td>{{ obj.orig }}</td>
                     	<td>of</td>
                     	<td>{{ obj.max }}</td>
-                </tr>
+                	</tr>
         		{% endfor %}
         	{% endif %}
 
 		</table>
-	</div>
-
-	<a class="btn btn-lg btn-block btn-outline-dark mt-2 p-4" href= "{% url 'index:ind-add' %}" style="font-size: 1.5em;">
+	<a class="btn btn-lg btn-block btn-outline-dark my-2 p-4" href= "{% url 'index:ind-add' %}" style="font-size: 1.5em;">
 		<i class="fa fa-edit fa-lg"></i>
 		TAKE THE TEST
 	</a>
+	</div>
 {% endblock content %}
 {% block post_js %}
 	<!-- <script>

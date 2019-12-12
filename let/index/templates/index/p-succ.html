@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 	{% if stats %}
-	<div class="jumbotron jumbotron-fluid text-center">
-		<h4>{{ stats.name }}, you got...</h4>
+	{% include 'paper.css' %}
+	<div class="jumbotron jumbotron-fluid text-center paper-gradient">
+		<h2 class="font-weight-bold">{{ stats.name }}, you got...</h2>
 		<h1 class="display-1" id="animate">0</h1>
 		{% if call %}
-	       		<p class="lead">	
-			You had {{ call }} to Top the L.E.T ! 
+	       		<p class="lead display-4">	
+			You have a <b>{{ call }}</b> to top the L.E.T ! 
 			</p>
 		{% endif %}
 	</div>
@@ -42,18 +43,24 @@
 			<div class="card-header" id="header2">
 			<h5 class="mb-0">
 			<button class="btn btn-link" data-toggle="collapse" data-target="#stats" style="font-size: 1em;">
-				<i class="far fa-chart-bar fa-lg mr-3"></i>Statistical Analysis
+				<i class="fas fa-brain fa-lg mr-3"></i>Statistical Analysis
 			</button>
 			</div>
 		
-		<div id="stats" class="collapse" data-parent="#accordion">
+			<div id="stats" class="collapse" data-parent="#accordion">
+			<a class="carousel-control-prev" href="#statslide" data-slide="prev" style="color: black;">
+				<span class="carousel-control-prev-icon" span>
+			</a>
+			<a class="carousel-control-next" href="#statslide" data-slide="next" style="color: black;">
+				<span class="carousel-control-next-icon" style="color: black;"></span>
+			</a>
 			<div id="statslide" class="carousel slide mb-2 mx-auto" data-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active"> 
 						<canvas id="myChart"> </canvas>
 						<div class="carousel-caption text-dark d-none d-block font-weight-bold">
 							<h4> Fig 1. Factors that affects the chance </h4>
-							<p> Consists of interpersonal and intrapersonal variables that affects... </p>
+							<p class="text-truncate"> Consists of interpersonal and intrapersonal variables that affects the chance of getting a high score </p>
 						</div>	
 					</div>
 					<div class="carousel-item">
@@ -65,59 +72,73 @@
 					</div>
 				</div>
 			</div>
-			<a class="carousel-control-prev" href="#statslide" data-slide="prev" style="color: black;">
-				<span class="carousel-control-prev-icon" span>
-			</a>
-			<a class="carousel-control-next" href="#statslide" data-slide="next" style="color: black;">
-				<span class="carousel-control-next-icon" style="color: black;"></span>
-			</a>
-			<div class="accordion" id="explanations">
-				<div class="card">
-					<div class="card-header" id="exph1">
-						<p class="mb-0"> 
-						<button class="btn btn-link" data-toggle="collapse" data-target="exp1">
-							Figure 1 explanation
-						</button>	
-						</p>
-					</div>
-					<div id="exp1" class="collapse show" data-parent="#explanations">
-						<div class="card card-body">
-							<h5>Personal Factors</h5>
-							<small class="lead">
-								Consisted of study habits, stead prayers life, consisted honor student, positive attitute, 
-								home study, bookworm/ reading in advance. 
-							</small>
-							<div class="row">
-								<div class="col-3">
-									<div class="list-group">
-										<a class="list-group-item list-group-item-action active" id="hftoggle" data-toggle="list" href="#hftab">Home Factor</a>
-										<a class="list-group-item list-group-item-action active" id="pftoggle" data-toggle="list" href="#pftab">Peer Factor</a>
-										<a class="list-group-item list-group-item-action active" id="sftoggle" data-toggle="list" href="#sftab">School Factor</a>
-										<a class="list-group-item list-group-item-action active" id="tftoggle" data-toggle="list" href="#tftab">Transportation Factor</a>
-									</div>
-									<div class="col-9">
-										<div class="tab-content">
-											<div class="tab-pane fade show active" id="hftab">
-												Family especiall the parents, Father as role of leadership
-											</div>
-											<div class="tab-pane fade" id="pftab">
-												Schoolmates as Review Buddy/Group
-											</div>
-											<div class="tab-pane fade" id="sftab">
-												Curriculum, faculty, learning resources, review program, administration
-											</div>
-											<div class="tab-pane fade" id="hftab">
-												Unit, time to go to school, traffic
-											</div>
-										</div>
-									</div>		
-									This factors affects one performance in exams especially in taking licensure ones. One person prepared and had a good performance sure does had a very high chance to topnotch and vice versa.
-								</div>
-					</div>
-				</div>
 		</div>
-		</div>		
+		<div class="card"> 
+			<div class="card-header" id="header3">
+			<h5 class="mb-0">
+			<button class="btn btn-link" data-toggle="collapse" data-target="#exp1" style="font-size: 1em;">
+				<i class="far fa-chart-bar fa-lg mr-3"></i>Figure 1 Graph Explanation
+			</button>
+			</div>
+			<div id="exp1" class="collapse" data-parent="#accordion">
+			<div class="card card-body">
+				<ul class="list-group-flush">
+					<li class="list-group-item">
+						<h5 class="font-weight-bold">Personal Factors</h5>
+						Consisted of study habits, stead prayers life, consisted honor student, positive attitute, 
+						home study, bookworm/ reading in advance.</li> 
+					<li class="list-group-item">
+						<h5 class="font-weight-bold">Family Factors</h5>
+						Family especially the parents, Father as role of leadership
+					</li>
+					<li class="list-group-item">
+						<h5 class="font-weight-bold">Peer Factors</h5>
+						Schoolmates as Review Buddy/Group
+					</li>
+					<li class="list-group-item">
+						<h5 class="font-weight-bold">School Factors</h5>
+						Curriculum, faculty, learning resources, review program, administration
+					</li>
+					<li class="list-group-item">
+						<h5 class="font-weight-bold">Traffic Factors</h5>
+						Unit, time to go to school, traffic
+					</li>
+				</ul>
+				<p>
+				These factors affects one performance in exams especially in taking licensure ones. One person prepared and had a good performance sure does had a very high chance to topnotch and vice versa. </p>
+			</div>
+			</div>
 		</div>
+		<div class="card">
+			<div class="card-header" id="header3">
+			<h5 class="mb-0">
+			<button class="btn btn-link" data-toggle="collapse" data-target="#exp2" style="font-size: 1em;">
+				<i class="fas fa-chart-pie fa-lg mr-3"></i>Figure 2 Graph Explanation
+			</button>
+			</div>
+			<div id="exp1" class="collapse" data-parent="#accordion">
+			<div class="card card-body">
+				<p>This shows all the datum gathered from the users that took the test. Consisted of the general weight coming from the total of weights gathered over the maximum weight. Consisted of four weights : Low Chance, Average Chance, High Chance, and Very High Chance. </p>
+				<ul class="list-group-flush">
+					<li class="list-group-item">
+						<p><b>Low Chance</b>,gathered from 25-49 performance.</p></li> 
+					<li class="list-group-item">
+						<p><b>Average Chance</b>,range from 50 to 74.</p></li> 
+					</li>
+					<li class="list-group-item">
+						<p><b>High Chance</b>range from 75 to 99.</p></li> 
+					</li>
+					<li class="list-group-item">
+						<p><b>Very High Chance/b>,from 100 and above.</p></li> 
+					</li>
+				</ul>
+			</div>
+		</div>
+		</div>
+
+		</div><!-- card -->
+		</div><!-- end accordion -->		
+		</div><!-- end container -->
 		<a class="p-4 my-5 btn btn-block btn-dark text-light" href = "{% url 'index:ind' %}" style="font-size: 1em">
 			<i class="fa fa-home fa-lg mr-2"></i>
 			Back To Home Page

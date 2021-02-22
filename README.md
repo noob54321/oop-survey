@@ -1,5 +1,6 @@
 # OOP-Survey
 A project for CSC 0102, a simple rating-survey generation site.
+*Site[here]*(https://let-oop.herokuapp.com/)
 
 # Requirements
 - [python3](https://www.python.org/downloads/)
@@ -14,7 +15,7 @@ oop-survey/
     ... # some apps and file
     <target>
 ```
-Command
+**Command**
 ```
     virtualenv venv
 ```

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'bootstrap4',
+    'bootstrap5',
+    'fontawesome_5',
     # apps below
     'app.exam',
 ]

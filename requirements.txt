@@ -1,4 +1,13 @@
-django==2.2.13
+Django==3.1.5
+djangorestframework==3.12.2
 django-extensions==2.2.5
-django-bootstrap-static==4.0.0
-django-crispy-forms==1.7.2
+django-bootstrap5==1.0.0
+django-crispy-forms==1.11.0
+django-fontawesome-5==1.0.18
+python-dotenv==0.15.0
+whitenoise==5.2.0
+
+# Server
+gunicorn==20.0.4
+gevent==1.4.0
+greenlet==0.4.15
